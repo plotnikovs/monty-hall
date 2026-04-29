@@ -6,9 +6,21 @@ public class Main {
 
     public static void main(String[] args){
 
-        System.out.println("Enter number of simulations: ");
+        int simulationCount = 0;
+        boolean inputValid = false;
         Scanner scanner = new Scanner(System.in);
-        int simulationCount = scanner.nextInt();
+
+        while(!inputValid){
+            try {
+                System.out.println("Enter number of simulations: ");
+                String input = scanner.nextLine();
+                simulationCount = Integer.parseInt(input);
+                inputValid = true;
+            }catch (NumberFormatException ex){
+                inputValid = false;
+            }
+        }
+        scanner.close();
 
         MontyHallSimulator simulateNoChange = new MontyHallSimulator(simulationCount,GameType.NOT_CHANGE_CHOICE);
         MontyHallSimulator simulateWithChange = new MontyHallSimulator(simulationCount,GameType.CHANGE_CHOICE);
