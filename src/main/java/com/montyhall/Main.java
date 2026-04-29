@@ -6,6 +6,23 @@ public class Main {
 
     public static void main(String[] args){
 
+        int simulationCount = getSimulationCount();
+
+        MontyHallSimulator simulateNoChange = new MontyHallSimulator(simulationCount,GameType.NOT_CHANGE_CHOICE);
+        MontyHallSimulator simulateWithChange = new MontyHallSimulator(simulationCount,GameType.CHANGE_CHOICE);
+
+        System.out.println("Win rate, when NOT changing your original choice: " + simulateNoChange.getWinRate() + "%");
+        System.out.println("Win rate, when changing your original choice: " + simulateWithChange.getWinRate() + "%");
+
+        if(simulateWithChange.getWinRate() > simulateNoChange.getWinRate()){
+            System.out.println("Do I stand a better chance to win if I change my mind? - YES");
+        } else {
+            System.out.println("Do I stand a better chance to win if I change my mind? - NO");
+        }
+
+    }
+
+    private static int getSimulationCount(){
         int simulationCount = 0;
         boolean inputValid = false;
         Scanner scanner = new Scanner(System.in);
@@ -22,17 +39,6 @@ public class Main {
         }
         scanner.close();
 
-        MontyHallSimulator simulateNoChange = new MontyHallSimulator(simulationCount,GameType.NOT_CHANGE_CHOICE);
-        MontyHallSimulator simulateWithChange = new MontyHallSimulator(simulationCount,GameType.CHANGE_CHOICE);
-
-        System.out.println("Win rate, when NOT changing your original choice: " + simulateNoChange.getWinRate() + "%");
-        System.out.println("Win rate, when changing your original choice: " + simulateWithChange.getWinRate() + "%");
-
-        if(simulateWithChange.getWinRate() > simulateNoChange.getWinRate()){
-            System.out.println("Do I stand a better chance to win if I change my mind? - YES");
-        } else {
-            System.out.println("Do I stand a better chance to win if I change my mind? - NO");
-        }
-
+        return simulationCount;
     }
 }
