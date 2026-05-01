@@ -7,15 +7,21 @@ public class MontyHallSimulator {
     private final int  simulationCount;
     private final GameType gameType;
     private int winCount;
+    private final Random random;
 
     private final static int NUMBER_OF_BOXES = 3;
 
-    public MontyHallSimulator(int simulationCount, GameType gameType){
+    public MontyHallSimulator(int simulationCount, GameType gameType, Random random){
         this.simulationCount = simulationCount;
         this.gameType = gameType;
         this.winCount = 0;
+        this.random = random;
 
         startSimulation();
+    }
+
+    public MontyHallSimulator(int simulationCount, GameType gameType){
+        this(simulationCount, gameType, new Random());
     }
 
     private void startSimulation(){
@@ -28,15 +34,14 @@ public class MontyHallSimulator {
     }
 
     private boolean simulateGame() {
-        Random random = new Random();
 
-        int prizeLocation = random.nextInt(NUMBER_OF_BOXES);
-        int playersChoice = random.nextInt(NUMBER_OF_BOXES);
+        int prizeLocation = this.random.nextInt(NUMBER_OF_BOXES);
+        int playersChoice = this.random.nextInt(NUMBER_OF_BOXES);
 
-        int hostsChoice = random.nextInt(NUMBER_OF_BOXES);
+        int hostsChoice = this.random.nextInt(NUMBER_OF_BOXES);
 
         while (hostsChoice == prizeLocation || hostsChoice == playersChoice){
-            hostsChoice = random.nextInt(NUMBER_OF_BOXES);
+            hostsChoice = this.random.nextInt(NUMBER_OF_BOXES);
         }
 
         BoxState[] boxStates = {BoxState.EMPTY,BoxState.EMPTY,BoxState.EMPTY};
